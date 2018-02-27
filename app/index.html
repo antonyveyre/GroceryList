@@ -17,15 +17,12 @@
 
   </div>
   <div id="itemList">
-
     <div v-for="itm in items">
       <span>{{itm}}</span><button v-on:click="itemDell">Remove</button><br/>
     </div>
     <button v-on:click="counter += 1">+1</button>
     <input type="text" v-model="item" />
-
     <button v-on:click="itemAdd">add</button>
-
     <p>Кнопка выше была нажата {{counter}} раз</p>
   </div>
 </body>
