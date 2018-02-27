@@ -1,0 +1,4 @@
+4 hours for first commit: 
+	session managment,
+	add items in list,
+	show items for current user.
