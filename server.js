@@ -44,9 +44,13 @@ app.get('/add', function(req, res){
 	}
 	users[req.session.id].push(req.query.item);
 	res.send(users[req.session.id]);
-
 });
 
+
+app.get('/delItem',function(req,res){
+	users[req.session.id].splice(req.query.index,1);
+	res.send(users[req.session.id]);
+})
 //
 // app.get(
 // 	'/',

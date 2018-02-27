@@ -10,20 +10,19 @@
 </head>
 <body>
 
-  <section class="head">
-    Grocery List of User {{res}} {{req}}
-  </section>
   <div class="list">
 
   </div>
   <div id="itemList">
-    <div v-for="itm in items">
-      <span>{{itm}}</span><button v-on:click="itemDell">Remove</button><br/>
+  <section class="head">
+    Grocery List of User {{res}} {{req}}
+  </section>
+    <div v-for="itm,index in items">
+      <span>{{itm}}</span><button v-on:click="itemDell(index)">Remove</button><br/>
     </div>
     <button v-on:click="counter += 1">+1</button>
-    <input type="text" v-model="item" />
+    <input type="text" v-model="item" v-on:keyup.enter="itemAdd" />
     <button v-on:click="itemAdd">add</button>
-    <p>Кнопка выше была нажата {{counter}} раз</p>
   </div>
 </body>
 
@@ -35,7 +34,7 @@ var appCl = new Vue({
     counter: 0,
     items : [],
     item: '',
-    req:'',
+    req : '',
     res:{}
   },
 
@@ -44,6 +43,7 @@ var appCl = new Vue({
       console.log(this);
       console.log(response.body);
       this.items = response.body;
+      this.req = response.session.id;
     }, response => {
       console.log('error !!!');
       // error callback
@@ -54,6 +54,15 @@ var appCl = new Vue({
   methods: {
 
     itemAdd: function () {
+      if (this.item==''){
+        alert ('item is empty');
+        return;
+      }
+      if (this.items.indexOf(this.item)!=-1)
+      {
+        alert ('item already exists');
+        return;
+      }
       console.log(this.item);
       this.$http.get('/add?item='+this.item).then(response => {
         console.log(this);
@@ -66,25 +75,36 @@ var appCl = new Vue({
       });
 
     },
-    itemDell: function (){
-        console.log(this);
-    },
-    deconnect: function (){
-      this.$http.get('/session').then(
+    itemDell: function(index){
+      console.log(index);
+      // this.$delete(this.items, index);
+      this.$http.get('/delItem?index='+index).then(
         response => {
-          alert('session deleted');
+          alert('item deleted');
+          this.items = response.body;
 
         },responseOnError => {
           alert('error deconnection')
 
         })
+
+      },
+      deconnect: function (){
+        this.$http.get('/session').then(
+          response => {
+            alert('session deleted');
+
+          },responseOnError => {
+            alert('error deconnection')
+
+          })
+        }
       }
-    }
-  });
+    });
 
-</script>
+  </script>
 
 
-<script src=./scripts/index.js></script>
+  <script src=./scripts/index.js></script>
 
-</html>
+  </html>
