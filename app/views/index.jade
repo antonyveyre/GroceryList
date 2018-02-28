@@ -15,7 +15,7 @@ html
         ul.item-list(v-for='itm,index in items')
           li
             div.view 
-              input.toggle(type="checkbox")
+              input.toggle(type="checkbox" value='{{index}}')
               label {{itm}}
               button.destroy(v-on:click='itemDell(index)', v-on:keyup.enter='itemDell(index)')
       footer.footer

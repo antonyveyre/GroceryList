@@ -57,9 +57,9 @@ var appCl = new Vue({
         }
         this.$http.get('/add?item='+this.item).then(response => {
           console.log(this);
-          console.log(response.body.items);
+          console.log(response.body);
           this.item ='';
-          this.items = response.body.items;
+          this.items = response.body;
         }, response => {
           console.error('error !!!');
           // error callback

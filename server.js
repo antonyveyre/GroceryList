@@ -4,6 +4,8 @@ const app = express();
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
+let users = [];
+
 function User(id,name) {
   this.id = id;
   this.name = name;
@@ -12,26 +14,21 @@ function User(id,name) {
 
 
 app.use(cookieParser());
-
 app.use(session({
 	secret: 'wild-cat',
 	saveUninitialized: true
 }));
-
 
 app.use(
 	'/',
 	express.static(__dirname + '/app')
 );
 
-let users = [];
 
 app.get('/session', function(req, res){
 	console.log(req.session.id);
 	console.log('req query item',req.query.userName);
 	let usr = users.find(o => o.id == req.session.id);
-	// let obj = listOfUsers.find(o => o.id === socket.id);
-
 	console.log('user on server'+usr);
 	if (usr===undefined&&req.query.userName=='undefined') {
 		console.log(' if session');
@@ -70,13 +67,15 @@ app.get('/add', function(req, res){
 	usrrespadd.items.push(req.query.item);
 	console.log(usrrespadd);
 	console.log(users);
-	res.send(usrrespadd);
+	res.send(usrrespadd.items);
 });
 
 
 app.get('/delItem',function(req,res){
-	users[req.session.id].splice(req.query.index,1);
-	res.send(users[req.session.id]);
+	let usrDel = users.find(o => o.id == req.session.id)
+	usrDel.items.splice(req.query.index,1)
+	// users[req.session.id].splice(req.query.index,1);
+	res.send(usrDel.items);
 })
 //
 // app.get(
