@@ -7,6 +7,8 @@ var appCl = new Vue({
     item: '',
     userId : ''
   },
+
+
   // on load
   mounted () {
     console.log(this.items);
@@ -40,10 +42,10 @@ var appCl = new Vue({
   },
 
   methods: {
-
     itemAdd: function () {
       console.log(this.items);
-      if (this.item==''){
+      if (this.item=='')
+      {
         alert ('item is empty');
         return;
       }
@@ -53,18 +55,22 @@ var appCl = new Vue({
         {
           alert ('item already exists');
           console.error('item already exists');
-          return;}
+          return;
         }
-        this.$http.get('/add?item='+this.item).then(response => {
+      }
+      this.$http.get('/add?item='+this.item)
+      .then(
+        response =>
+        {
           console.log(this);
           console.log(response.body);
           this.item ='';
           this.items = response.body;
-        }, response => {
+        }, response =>
+        {
           console.error('error !!!');
           // error callback
         });
-
       },
 
       itemDell: function(index){
@@ -78,13 +84,30 @@ var appCl = new Vue({
           })
         },
 
-        deconnect: function (){
-          this.$http.get('/session').then(
+        itemChng: function(index)
+        {
+          console.log(index);
+          this.$http.get('/chngItem?index='+index).then(
             response => {
-              alert('session deleted');
-            },responseOnError => {
-              alert('error deconnection')
+              this.items = response.body;
+            }, responseOnError =>
+            {
+              alert('error on change')
             })
+          },
+
+          deconnect: function (){
+            this.$http.get('/logoff').then(
+              response => {
+                if (response.body == 'logout')
+                {
+                  alert('session deleted');
+                  cdocument.querySelector('html').innerHTML='';
+                }
+              },responseOnError => {
+                alert('error deconnection')
+                console.error(responseOnError);
+              })
+            }
           }
-        }
-      });
+        });

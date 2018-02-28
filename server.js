@@ -12,12 +12,18 @@ function User(id,name) {
   this.items = [];
 }
 
+function Item(text) {
+	this.text = text;
+  this.checked = false;
+}
+
 
 app.use(cookieParser());
 app.use(session({
 	secret: 'wild-cat',
 	saveUninitialized: true
 }));
+
 
 app.use(
 	'/',
@@ -53,22 +59,29 @@ app.get('/session', function(req, res){
 
 
 app.get('/add', function(req, res){
-	console.log('1 start add request');
-	console.log('2',users[req.session.id]);
-	console.log('3',req.session.id);
-	if(users[req.session.id]===undefined){
-		users[req.session.id] = [];
-		console.log('session added');
-		console.log('item added');
-	}
-	// users.find(o => o.id == req.session.id).items.push(req.query.item);
+	// console.log('1 start add request');
+	// console.log('2',users[req.session.id]);
+	// console.log('3',req.session.id);
+	// if(users[req.session.id]===undefined){
+	// 	users[req.session.id] = [];
+	// 	console.log('session added');
+	// 	console.log('item added');
+	// }
+	// // users.find(o => o.id == req.session.id).items.push(req.query.item);
 	console.log(users);
 	let usrrespadd = users.find(o => o.id == req.session.id)
-	usrrespadd.items.push(req.query.item);
+	usrrespadd.items.push(new Item(req.query.item));
 	console.log(usrrespadd);
 	console.log(users);
 	res.send(usrrespadd.items);
 });
+
+
+app.get('/chngItem',function(req,res){
+	let usrChk = users.find(o => o.id == req.session.id);
+	usrChk.items[req.query.index].checked = !usrChk.items[req.query.index].checked;
+	res.send(usrChk.items);
+})
 
 
 app.get('/delItem',function(req,res){
@@ -76,6 +89,13 @@ app.get('/delItem',function(req,res){
 	usrDel.items.splice(req.query.index,1)
 	// users[req.session.id].splice(req.query.index,1);
 	res.send(usrDel.items);
+})
+
+
+app.get('/logoff',function(req,res){
+	let usrLogoff = users.find(o => o.id == req.session.id)
+	users.splice(users.indexOf(usrLogoff),1)
+	res.send('logout');
 })
 //
 // app.get(
