@@ -1,3 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <link rel=stylesheet href=./styles/index.css>
+  <title>GroceryList</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.4.0"></script>
+</head>
+<body>
+  <div class="list">
+  </div>
+  <div id="itemList">
+    <section class="head">
+      Grocery List of User {{userId}}
+    </section>
+    <div v-for="itm,index in items">
+      <span>{{itm}}</span><button v-on:click="itemDell(index)" v-on:keyup.enter="itemDell(index)">Remove</button><br/>
+    </div>
+    <input type="text" v-model="item" v-on:keyup.enter="itemAdd" />
+    <button v-on:click="itemAdd" v-on:keyup.enter="itemAdd">add</button>
+    <button v-on:click="deconnect" v-on:keyup.enter="deconnect">deconnection</button>
+  </div>
+</body>
+
+
+<script>
+// application Client
 var appCl = new Vue({
   el: '#itemList',
   data: {
@@ -67,3 +95,8 @@ var appCl = new Vue({
         }
       }
     });
+    </script>
+
+
+
+    </html>
