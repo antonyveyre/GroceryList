@@ -7,18 +7,31 @@ html
     script(src='https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js')
     script(src='https://cdn.jsdelivr.net/npm/vue-resource@1.4.0')
   body
-    .main
-      section.head
-        | Grocery List of User {{userId}}
-    #itemList.itemapp
-      ul.item-list(v-for='itm,index in items')
-        li
-          div.view
-            input.toggle(type="checkbox" checked="false")
-            label {{itm}}
-            button.destroy(v-on:click='itemDell(index)', v-on:keyup.enter='itemDell(index)')
-        br
-      input.new-item(type='text', v-model='item', v-on:keyup.enter='itemAdd')
-      button(v-on:click='itemAdd', v-on:keyup.enter='itemAdd') add
-      button(v-on:click='deconnect', v-on:keyup.enter='deconnect') deconnection
+    #itemapp
+      .header
+        h1 Grocery List of User {{userId}}
+      #itemList.item-list
+        input.new-item(type='text', v-model='item', v-on:keyup.enter='itemAdd' placeholder="add an item to list" autofocus)
+        ul.item-list(v-for='itm,index in items')
+          li
+            div.view 
+              input.toggle(type="checkbox")
+              label {{itm}}
+              button.destroy(v-on:click='itemDell(index)', v-on:keyup.enter='itemDell(index)')
+      footer.footer
+        ul.filters
+          li
+            button(v-on:click='itemAdd', v-on:keyup.enter='itemAdd') add
+          li
+            button.selected All
+          li
+            button Active
+          li
+            button Completed
+          li
+            button(v-on:click='deconnect', v-on:keyup.enter='deconnect') deconnection
+
+          button.clear-completed(style='display:none') Clear completed
+
+
     script(src='/scripts/index.js')

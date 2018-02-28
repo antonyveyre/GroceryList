@@ -5,7 +5,7 @@ $white: #fff;
 $black_20: rgba(0, 0, 0, 0.2);
 $black_10: rgba(0, 0, 0, 0.1);
 $color_mercury_approx: #e6e6e6;
-$color_well_read_15_approx: rgba(175, 47, 47, 0.15);
+$blue_druide: #1d76bc;
 $color_mountain_mist_approx: #999;
 $black_0_3: rgba(0, 0, 0, 0.003);
 $black_3: rgba(0,0,0,0.03);
@@ -15,20 +15,19 @@ $color_alto_approx: #d9d9d9;
 $color_eunry_approx: #cc9a9a;
 $color_matrix_approx: #af5b5e;
 $color_black_haze_approx: #f6f6f6;
-$color_well_read_10_approx: rgba(175, 47, 47, 0.1);
+$color_well_read_10_approx: rgba(255, 47, 47, 0.1);
 $color_well_read_20_approx: rgba(175, 47, 47, 0.2);
 $color_silver_approx: #bfbfbf;
 $white_50: rgba(255, 255, 255, 0.5);
 
 //fonts
-$font_0: Helvetica Neue;
+$font_0: Roboto;
 $font_1: Helvetica;
 $font_2: Arial;
 $font_3: sans-serif;
 
 //data-uris
-$data_uri_0: "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>";
-$data_uri_1: "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>";
+
 
 //@extend-elements
 //original selectors
@@ -72,7 +71,6 @@ body {
 	margin: 0;
 	padding: 0;
 	font: 14px $font_0, $font_1, $font_2, $font_3;
-	line-height: 1.4em;
 	background: $color_wild_sand_approx;
 	color: $color_emperor_approx;
 	min-width: 230px;
@@ -82,22 +80,16 @@ body {
 	font-weight: 300;
 }
 button {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background: none;
-	font-size: 100%;
-	vertical-align: baseline;
-	font-family: inherit;
-	font-weight: inherit;
 	color: inherit;
-	appearance: none;
-	font-smoothing: antialiased;
-	outline: none;
+	margin: 3px;
+	padding: 3px 7px;
+	text-decoration: none;
+	border: 1px solid transparent;
+	border-radius: 3px;
 }
-input[type="checkbox"] {
-	outline: none;
-}
+// input[type="checkbox"] {
+// 	outline: none;
+// }
 .hidden {
 	display: none;
 }
@@ -117,18 +109,17 @@ input[type="checkbox"] {
 		color: $color_mercury_approx;
 	}
 	input::input-placeholder {
-		font-style: italic;
 		font-weight: 300;
 		color: $color_mercury_approx;
 	}
 	h1 {
 		position: absolute;
-		top: -155px;
+		top: -95px;
 		width: 100%;
-		font-size: 100px;
+		font-size: 30px;
 		font-weight: 100;
 		text-align: center;
-		color: $color_well_read_15_approx;
+		color: $blue_druide;
 		text-rendering: optimizeLegibility;
 	}
 }
@@ -137,14 +128,10 @@ input[type="checkbox"] {
 	padding: 16px 16px 16px 60px;
 	border: none;
 	background: $black_0_3;
-	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 	box-shadow: inset 0 -2px 1px $black_3;
 }
 .edit {
 	@extend %extend_1;
-}
-.model {
-	display: none;
 }
 .main {
 	position: relative;
@@ -201,20 +188,14 @@ label[for='toggle-all'] {
 		}
 		.toggle {
 			text-align: center;
-			width: 40px;
+			width: auto;
 			height: auto;
 			position: absolute;
 			top: 0;
 			bottom: 0;
+			left: 20px;
 			margin: auto 0;
 			border: none;
-			appearance: none;
-			&:after {
-				content: url($data_uri_1);
-			}
-			&:checked:after {
-				content: url($data_uri_0);
-			}
 		}
 		label {
 			white-space: pre-line;
@@ -245,7 +226,7 @@ label[for='toggle-all'] {
 				color: $color_matrix_approx;
 			}
 			&:after {
-				content: '×';
+				content: '✘';
 			}
 		}
 		.edit {
@@ -352,7 +333,7 @@ li {
 	}
 	.item-list li .toggle {
 		background: none;
-		height: 40px;
+		height: auto;
 	}
 }
 @media(max-width: 430px) {

@@ -4,6 +4,11 @@ const app = express();
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
+function User(id,name) {
+  this.id = id;
+  this.name = name;
+  this.items = [];
+}
 
 
 app.use(cookieParser());
@@ -14,31 +19,41 @@ app.use(session({
 }));
 
 
-
-
-
-
 app.use(
 	'/',
 	express.static(__dirname + '/app')
 );
 
-let users = {};
+let users = [];
 
 app.get('/session', function(req, res){
 	console.log(req.session.id);
-	console.log(req.query.item);
-	if(users[req.session.id]===undefined){
-		users[req.session.id] = [];
-		console.log('session added');
+	console.log('req query item',req.query.userName);
+	let usr = users.find(o => o.id == req.session.id);
+	// let obj = listOfUsers.find(o => o.id === socket.id);
+
+	console.log('user on server'+usr);
+	if (usr===undefined&&req.query.userName=='undefined') {
+		console.log(' if session');
+		res.send('nameRequest');
+	}
+	else if(usr===undefined){
+		console.log('else if in session');
+		console.log('user name in else if ' +  req.query.userName);
+		let newUser = new User(req.session.id,req.query.userName)
+		users.push(newUser);
+		res.send(newUser)
+		console.log(users);
 	}
 	else{
 		console.log('session already exists');
 		console.log(users[req.session.id]);
+		let usrres = users.find(o => o.id === req.session.id)
+		console.log(usrres);
+		res.send(usrres);
 	}
-	res.send(users[req.session.id]);
-
 });
+
 
 app.get('/add', function(req, res){
 	console.log('1 start add request');
@@ -49,8 +64,13 @@ app.get('/add', function(req, res){
 		console.log('session added');
 		console.log('item added');
 	}
-	users[req.session.id].push(req.query.item);
-	res.send(users[req.session.id]);
+	// users.find(o => o.id == req.session.id).items.push(req.query.item);
+	console.log(users);
+	let usrrespadd = users.find(o => o.id == req.session.id)
+	usrrespadd.items.push(req.query.item);
+	console.log(usrrespadd);
+	console.log(users);
+	res.send(usrrespadd);
 });
 
 

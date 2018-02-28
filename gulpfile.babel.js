@@ -14,9 +14,10 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('app/styles'));
 });
 
-// gulp.task('sass:watch', function () {
-//   gulp.watch('app/sass/*.scss', ['sass']);
-// });
+gulp.task('sass_jade:watch', function () {
+  gulp.watch('app/views/*.jade', ['templates']);
+  gulp.watch('app/sass/*.scss', ['sass']);
+});
 
-gulp.task('default', ['templates','sass' ]);
-// gulp.task('default', ['templates','sass','sass:watch' ]);
+// gulp.task('default', ['templates','sass' ]);
+gulp.task('default', ['templates','sass','sass_jade:watch' ]);

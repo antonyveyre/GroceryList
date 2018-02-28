@@ -1,5 +1,6 @@
+
 var appCl = new Vue({
-  el: '#itemList',
+  el: '#itemapp',
   data: {
     counter: 0,
     items : [],
@@ -8,11 +9,30 @@ var appCl = new Vue({
   },
   // on load
   mounted () {
-    this.$http.get('/session').then(response => {
+    console.log(this.items);
+    let name;
+    function enterYourName(){
+      name = prompt('enter your name')
+      if (!name || !name.trim()){
+        enterYourName();
+      }
+    };
+    this.$http.get('/session?userName='+name).then(response => {
       console.log(this);
       console.log(response.body);
-      this.items = response.body;
-      this.userId = response.session;
+      if (response.body=='nameRequest')
+      {
+        enterYourName();
+        this.$http.get('/session?userName='+name).then(response => {
+          this.userId = name;
+        },
+        response => {
+          console.error('error');
+        });
+      }
+      console.log(response.body);
+      this.items = response.body.items;
+      this.userId = response.body.name;
     }, response => {
       console.log('error !!!');
       // error callback
@@ -22,48 +42,49 @@ var appCl = new Vue({
   methods: {
 
     itemAdd: function () {
+      console.log(this.items);
       if (this.item==''){
         alert ('item is empty');
         return;
       }
-      if (this.items.indexOf(this.item)!=-1)
+      if (this.items!==undefined)
       {
-        alert ('item already exists');
-        console.error('item already exists');
-        return;
-      }
-      console.log(this.item);
-      this.$http.get('/add?item='+this.item).then(response => {
-        console.log(this);
-        console.log(response.body);
-        this.item ='';
-        this.items = response.body;
-      }, response => {
-        console.error('error !!!');
-        // error callback
-      });
+        if (this.items.indexOf(this.item)!=-1)
+        {
+          alert ('item already exists');
+          console.error('item already exists');
+          return;}
+        }
+        this.$http.get('/add?item='+this.item).then(response => {
+          console.log(this);
+          console.log(response.body.items);
+          this.item ='';
+          this.items = response.body.items;
+        }, response => {
+          console.error('error !!!');
+          // error callback
+        });
 
-    },
-
-    itemDell: function(index){
-      console.log(index);
-      // this.$delete(this.items, index);
-      this.$http.get('/delItem?index='+index).then(
-        response => {
-          alert('item deleted');
-          this.items = response.body;
-        },responseOnError => {
-          alert('error deconnection')
-        })
       },
 
-      deconnect: function (){
-        this.$http.get('/session').then(
+      itemDell: function(index){
+        console.log(index);
+        // this.$delete(this.items, index);
+        this.$http.get('/delItem?index='+index).then(
           response => {
-            alert('session deleted');
+            this.items = response.body;
           },responseOnError => {
-            alert('error deconnection')
+            alert('error on delete')
           })
+        },
+
+        deconnect: function (){
+          this.$http.get('/session').then(
+            response => {
+              alert('session deleted');
+            },responseOnError => {
+              alert('error deconnection')
+            })
+          }
         }
-      }
-    });
+      });

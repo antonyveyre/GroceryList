@@ -29,8 +29,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font: 14px Helvetica Neue, Helvetica, Arial, sans-serif;
-  line-height: 1.4em;
+  font: 14px Roboto, Helvetica, Arial, sans-serif;
   background: #f5f5f5;
   color: #4d4d4d;
   min-width: 230px;
@@ -40,21 +39,12 @@ body {
   font-weight: 300; }
 
 button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  font-size: 100%;
-  vertical-align: baseline;
-  font-family: inherit;
-  font-weight: inherit;
   color: inherit;
-  appearance: none;
-  font-smoothing: antialiased;
-  outline: none; }
-
-input[type="checkbox"] {
-  outline: none; }
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px; }
 
 .hidden {
   display: none; }
@@ -73,17 +63,16 @@ input[type="checkbox"] {
     font-weight: 300;
     color: #e6e6e6; }
   .itemapp input::input-placeholder {
-    font-style: italic;
     font-weight: 300;
     color: #e6e6e6; }
   .itemapp h1 {
     position: absolute;
-    top: -155px;
+    top: -95px;
     width: 100%;
-    font-size: 100px;
+    font-size: 30px;
     font-weight: 100;
     text-align: center;
-    color: rgba(175, 47, 47, 0.15);
+    color: #1d76bc;
     text-rendering: optimizeLegibility; }
 
 .new-item {
@@ -91,9 +80,6 @@ input[type="checkbox"] {
   border: none;
   background: rgba(0, 0, 0, 0.003);
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03); }
-
-.model {
-  display: none; }
 
 .main {
   position: relative;
@@ -143,18 +129,14 @@ label[for='toggle-all'] {
         margin-bottom: -1px; }
     .item-list li .toggle {
       text-align: center;
-      width: 40px;
+      width: auto;
       height: auto;
       position: absolute;
       top: 0;
       bottom: 0;
+      left: 20px;
       margin: auto 0;
-      border: none;
-      appearance: none; }
-      .item-list li .toggle:after {
-        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width=' 40 " height=" 40 " viewBox="-10-18 100 135 "><circle cx=" 50 " cy=" 50 " r=" 50 " fill=" none " stroke=" #ededed " stroke-width=" 3 "/></svg>"); }
-      .item-list li .toggle:checked:after {
-        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width=' 40 " height=" 40 " viewBox="-10-18 100 135 "><circle cx=" 50 " cy=" 50 " r=" 50 " fill=" none " stroke=" #bddad5 " stroke-width=" 3 "/><path fill=" #5dc2af " d=" M72 25L42 71 27 52l 4 20 20 -18z "/></svg>"); }
+      border: none; }
     .item-list li label {
       white-space: pre-line;
       word-break: break-all;
@@ -179,7 +161,7 @@ label[for='toggle-all'] {
       .item-list li .destroy:hover {
         color: #af5b5e; }
       .item-list li .destroy:after {
-        content: '×'; }
+        content: '✘'; }
     .item-list li .edit {
       display: none; }
     .item-list li.completed label {
@@ -233,10 +215,10 @@ li input.item-edit {
       border: 1px solid transparent;
       border-radius: 3px; }
       .filters li a.selected {
-        border-color: rgba(175, 47, 47, 0.1);
+        border-color: rgba(255, 47, 47, 0.1);
         border-color: rgba(175, 47, 47, 0.2); }
       .filters li a:hover {
-        border-color: rgba(175, 47, 47, 0.1); }
+        border-color: rgba(255, 47, 47, 0.1); }
 
 .clear-completed:hover {
   text-decoration: underline; }
@@ -263,7 +245,7 @@ li input.item-edit {
     appearance: none; }
   .item-list li .toggle {
     background: none;
-    height: 40px; } }
+    height: auto; } }
 
 @media (max-width: 430px) {
   .footer {
