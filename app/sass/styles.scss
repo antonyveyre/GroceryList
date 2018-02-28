@@ -1,0 +1,365 @@
+//colors
+$color_wild_sand_approx: #f5f5f5;
+$color_emperor_approx: #4d4d4d;
+$white: #fff;
+$black_20: rgba(0, 0, 0, 0.2);
+$black_10: rgba(0, 0, 0, 0.1);
+$color_mercury_approx: #e6e6e6;
+$color_well_read_15_approx: rgba(175, 47, 47, 0.15);
+$color_mountain_mist_approx: #999;
+$black_0_3: rgba(0, 0, 0, 0.003);
+$black_3: rgba(0,0,0,0.03);
+$color_tapa_approx: #737373;
+$color_gallery_approx: #ededed;
+$color_alto_approx: #d9d9d9;
+$color_eunry_approx: #cc9a9a;
+$color_matrix_approx: #af5b5e;
+$color_black_haze_approx: #f6f6f6;
+$color_well_read_10_approx: rgba(175, 47, 47, 0.1);
+$color_well_read_20_approx: rgba(175, 47, 47, 0.2);
+$color_silver_approx: #bfbfbf;
+$white_50: rgba(255, 255, 255, 0.5);
+
+//fonts
+$font_0: Helvetica Neue;
+$font_1: Helvetica;
+$font_2: Arial;
+$font_3: sans-serif;
+
+//data-uris
+$data_uri_0: "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>";
+$data_uri_1: "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>";
+
+//@extend-elements
+//original selectors
+//.new-item, .edit
+%extend_1 {
+	position: relative;
+	margin: 0;
+	width: 100%;
+	font-size: 24px;
+	font-family: inherit;
+	font-weight: inherit;
+	line-height: 1.4em;
+	outline: none;
+	color: inherit;
+	padding: 6px;
+	border: 1px solid $color_mountain_mist_approx;
+	box-shadow: inset 0 -1px 5px 0 $black_20;
+	box-sizing: border-box;
+	font-smoothing: antialiased;
+}
+
+//original selectors
+//.clear-completed, html .clear-completed:active
+%extend_2 {
+	float: right;
+	line-height: 20px;
+	text-decoration: none;
+	cursor: pointer;
+	position: relative;
+}
+
+
+html {
+	margin: 0;
+	padding: 0;
+	.clear-completed:active {
+		@extend %extend_2;
+	}
+}
+body {
+	margin: 0;
+	padding: 0;
+	font: 14px $font_0, $font_1, $font_2, $font_3;
+	line-height: 1.4em;
+	background: $color_wild_sand_approx;
+	color: $color_emperor_approx;
+	min-width: 230px;
+	max-width: 550px;
+	margin: 0 auto;
+	font-smoothing: antialiased;
+	font-weight: 300;
+}
+button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	font-size: 100%;
+	vertical-align: baseline;
+	font-family: inherit;
+	font-weight: inherit;
+	color: inherit;
+	appearance: none;
+	font-smoothing: antialiased;
+	outline: none;
+}
+input[type="checkbox"] {
+	outline: none;
+}
+.hidden {
+	display: none;
+}
+.itemapp {
+	background: $white;
+	margin: 130px 0 40px;
+	position: relative;
+	box-shadow: 0 2px 4px 0 $black_20, 0 25px 50px 0 $black_10;
+	input::-webkit-input-placeholder {
+		font-style: italic;
+		font-weight: 300;
+		color: $color_mercury_approx;
+	}
+	input::-moz-placeholder {
+		font-style: italic;
+		font-weight: 300;
+		color: $color_mercury_approx;
+	}
+	input::input-placeholder {
+		font-style: italic;
+		font-weight: 300;
+		color: $color_mercury_approx;
+	}
+	h1 {
+		position: absolute;
+		top: -155px;
+		width: 100%;
+		font-size: 100px;
+		font-weight: 100;
+		text-align: center;
+		color: $color_well_read_15_approx;
+		text-rendering: optimizeLegibility;
+	}
+}
+.new-item {
+	@extend %extend_1;
+	padding: 16px 16px 16px 60px;
+	border: none;
+	background: $black_0_3;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: inset 0 -2px 1px $black_3;
+}
+.edit {
+	@extend %extend_1;
+}
+.model {
+	display: none;
+}
+.main {
+	position: relative;
+	z-index: 2;
+	border-top: 1px solid $color_mercury_approx;
+}
+label[for='toggle-all'] {
+	display: none;
+}
+.toggle-all {
+	position: absolute;
+	top: -55px;
+	left: -12px;
+	width: 60px;
+	height: 34px;
+	text-align: center;
+	border: none;
+	&:before {
+		content: '❯';
+		font-size: 22px;
+		color: $color_mercury_approx;
+		padding: 10px 27px;
+	}
+	&:checked:before {
+		color: $color_tapa_approx;
+	}
+}
+.item-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	li {
+		position: relative;
+		font-size: 24px;
+		border-bottom: 1px solid $color_gallery_approx;
+		&:last-child {
+			border-bottom: none;
+		}
+		&.editing {
+			border-bottom: none;
+			padding: 0;
+			.edit {
+				display: block;
+				width: 506px;
+				padding: 13px 17px 12px;
+				margin: 0 0 0 43px;
+			}
+			.view {
+				display: none;
+			}
+			&:last-child {
+				margin-bottom: -1px;
+			}
+		}
+		.toggle {
+			text-align: center;
+			width: 40px;
+			height: auto;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin: auto 0;
+			border: none;
+			appearance: none;
+			&:after {
+				content: url($data_uri_1);
+			}
+			&:checked:after {
+				content: url($data_uri_0);
+			}
+		}
+		label {
+			white-space: pre-line;
+			//Instead of the line below you could use @include word-break($value)
+			word-break: break-all;
+			padding: 15px 60px 15px 15px;
+			margin-left: 45px;
+			display: block;
+			line-height: 1.2;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: color 0.4s;
+		}
+		.destroy {
+			display: none;
+			position: absolute;
+			top: 0;
+			right: 10px;
+			bottom: 0;
+			width: 40px;
+			height: 40px;
+			margin: auto 0;
+			font-size: 30px;
+			color: $color_eunry_approx;
+			margin-bottom: 11px;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: color 0.2s ease-out;
+			&:hover {
+				color: $color_matrix_approx;
+			}
+			&:after {
+				content: '×';
+			}
+		}
+		.edit {
+			display: none;
+		}
+		&.completed label {
+			color: $color_alto_approx;
+			text-decoration: line-through;
+		}
+		&:hover .destroy {
+			display: block;
+		}
+	}
+}
+li {
+	&.editing label {
+		display: none;
+	}
+	input.item-edit {
+		display: none;
+	}
+}
+.footer {
+	color: $color_tapa_approx;
+	padding: 10px 15px;
+	height: 20px;
+	text-align: center;
+	border-top: 1px solid $color_mercury_approx;
+	&:before {
+		content: '';
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 50px;
+		overflow: hidden;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 1px 1px $black_20, 0 8px 0 -3px $color_black_haze_approx, 0 9px 1px -3px $black_20, 0 16px 0 -6px $color_black_haze_approx, 0 17px 2px -6px $black_20;
+	}
+}
+.item-count {
+	float: left;
+	text-align: left;
+	strong {
+		font-weight: 300;
+	}
+}
+.filters {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	right: 0;
+	left: 0;
+	li {
+		display: inline;
+		a {
+			color: inherit;
+			margin: 3px;
+			padding: 3px 7px;
+			text-decoration: none;
+			border: 1px solid transparent;
+			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+			border-radius: 3px;
+			&.selected {
+				border-color: $color_well_read_10_approx;
+				border-color: $color_well_read_20_approx;
+			}
+			&:hover {
+				border-color: $color_well_read_10_approx;
+			}
+		}
+	}
+}
+.clear-completed {
+	@extend %extend_2;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+.info {
+	margin: 65px auto 0;
+	color: $color_silver_approx;
+	font-size: 10px;
+	text-shadow: 0 1px 0 $white_50;
+	text-align: center;
+	p {
+		line-height: 1;
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+		font-weight: 400;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+	.toggle-all {
+		background: none;
+		transform: rotate(90deg);
+		appearance: none;
+	}
+	.item-list li .toggle {
+		background: none;
+		height: 40px;
+	}
+}
+@media(max-width: 430px) {
+	.footer {
+		height: 50px;
+	}
+	.filters {
+		bottom: 10px;
+	}
+}
