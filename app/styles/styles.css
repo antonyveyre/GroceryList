@@ -65,15 +65,15 @@ button {
   .itemapp input::input-placeholder {
     font-weight: 300;
     color: #e6e6e6; }
-  .itemapp h1 {
-    position: absolute;
-    top: -95px;
-    width: 100%;
-    font-size: 30px;
-    font-weight: 100;
-    text-align: center;
-    color: #1d76bc;
-    text-rendering: optimizeLegibility; }
+
+h1 {
+  top: -95px;
+  width: 100%;
+  font-size: 30px;
+  font-weight: 100;
+  text-align: center;
+  color: #1d76bc;
+  text-rendering: optimizeLegibility; }
 
 .new-item {
   padding: 16px 16px 16px 60px;

@@ -112,16 +112,19 @@ button {
 		font-weight: 300;
 		color: $color_mercury_approx;
 	}
-	h1 {
-		position: absolute;
-		top: -95px;
-		width: 100%;
-		font-size: 30px;
-		font-weight: 100;
-		text-align: center;
-		color: $blue_druide;
-		text-rendering: optimizeLegibility;
+	.header{
+
 	}
+}
+
+h1 {
+	top: -95px;
+	width: 100%;
+	font-size: 30px;
+	font-weight: 100;
+	text-align: center;
+	color: $blue_druide;
+	text-rendering: optimizeLegibility;
 }
 .new-item {
 	@extend %extend_1;
