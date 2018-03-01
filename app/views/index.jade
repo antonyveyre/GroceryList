@@ -11,7 +11,7 @@ html
       .header
         h1 Grocery List of {{userId}}
       #itemList.item-list
-        input.new-item(type='text', v-model='item', v-on:keyup.enter='itemAdd' placeholder="add an item to list" autofocus)
+        input.new-item(type='text', v-model='item', v-on:keyup.enter='itemAdd' placeholder="to buy" autofocus)
         ul.item-list(v-for='itm,index in shownItems')
           li
             div.view 
