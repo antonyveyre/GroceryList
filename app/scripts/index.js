@@ -93,10 +93,10 @@ var appCl = new Vue({
           })
         },
 
-        itemChng: function(index)
+        itemChng: function(title)
         {
-          console.log(index);
-          this.$http.get('/chngItem?index='+index).then(
+          console.log(title);
+          this.$http.get('/chngItem?title='+title).then(
             response => {
               this.items = response.body;
             }, responseOnError =>

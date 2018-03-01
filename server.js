@@ -79,14 +79,20 @@ app.get('/add', function(req, res){
 
 app.get('/chngItem',function(req,res){
 	let usrChk = users.find(o => o.id == req.session.id);
-	usrChk.items[req.query.index].checked = !usrChk.items[req.query.index].checked;
+	console.log('usrChk', usrChk);
+	let itm2cng = usrChk.items.find(i => i.text == req.query.title)
+	console.log(itm2cng);
+	itm2cng.checked = !itm2cng.checked;
+	// usrChk.items[req.query.index].checked = !usrChk.items[req.query.index].checked;
 	res.send(usrChk.items);
 })
 
 
 app.get('/delItem',function(req,res){
 	let usrDel = users.find(o => o.id == req.session.id)
-	usrDel.items.splice(req.query.index,1)
+	let itm2cng = usrDel.items.find(i => i.text == req.query.title)
+	let indexToPop = usrDel.items.indexOf(itm2cng);
+	usrDel.items.splice(indexToPop,1)
 	// users[req.session.id].splice(req.query.index,1);
 	res.send(usrDel.items);
 })

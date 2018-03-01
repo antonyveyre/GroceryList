@@ -12,12 +12,12 @@ html
         h1 Grocery List of {{userId}}
       #itemList.item-list
         input.new-item(type='text', v-model='item', v-on:keyup.enter='itemAdd' placeholder="to buy" autofocus)
-        ul.item-list(v-for='itm,index in shownItems')
+        ul.item-list(v-for='itm in shownItems')
           li
             div.view 
-              input.toggle(type="checkbox" class="button" v-model="itm.checked" v-on:click='itemChng(index)')
+              input.toggle(type="checkbox" class="button" v-model="itm.checked" v-on:click='itemChng(itm.text)')
               label {{itm.text}}
-              button.destroy(v-on:click='itemDell(index)', v-on:keyup.enter='itemDell(index)')
+              button.destroy(v-on:click='itemDell(itm.text)', v-on:keyup.enter='itemDell(itm.text)')
       footer.footer
         ul.filters
           li 
@@ -30,7 +30,5 @@ html
             button(v-on:click='showDone', v-on:keyup.enter='showDone') bought
           li
             button(v-on:click='deconnect', v-on:keyup.enter='deconnect') deconnection
-
-
 
     script(src='/scripts/index.js')
