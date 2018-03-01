@@ -67,7 +67,12 @@ app.get('/delItem',function(req,res){
 	let usrDel = users.find(o => o.id == req.session.id)
 	let itm2cng = usrDel.items.find(i => i.text == req.query.title)
 	let indexToPop = usrDel.items.indexOf(itm2cng);
-	usrDel.items.splice(indexToPop,1)
+	console.log('title',req.query.title);
+	console.log('usrdel',usrDel);
+	console.log('itm2chng',itm2cng);
+	console.log('indexToPop',indexToPop);
+
+  usrDel.items.splice(indexToPop,1)
 	res.send(usrDel.items);
 })
 

@@ -75,7 +75,7 @@ var appCl = new Vue({
       itemDell: function(index){
         console.log(index);
         // this.$delete(this.items, index);
-        this.$http.get('/delItem?index='+index).then(
+        this.$http.get('/delItem?title='+index).then(
           response => {
             this.items = response.body;
             this.shownItems = this.items;
@@ -102,7 +102,7 @@ var appCl = new Vue({
                 if (response.body == 'logout')
                 {
                   alert('session deleted');
-                  cdocument.querySelector('html').innerHTML='';
+                  document.querySelector('html').innerHTML='';
                 }
               },responseOnError => {
                 alert('error deconnection')
