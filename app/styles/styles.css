@@ -244,3 +244,14 @@ li input.item-edit {
   .item-list li .toggle {
     background: none;
     height: auto; } }
+
+[type=checkbox] {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2);
+  /* IE */
+  -moz-transform: scale(2);
+  /* FF */
+  -webkit-transform: scale(2);
+  /* Safari and Chrome */
+  -o-transform: scale(2);
+  /* Opera */ }
