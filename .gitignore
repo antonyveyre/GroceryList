@@ -7,6 +7,7 @@ yarn-error.log*
 
 app/index.html
 app/index_old.html
+app/styles/styles.css
 
 # Runtime data
 pids
